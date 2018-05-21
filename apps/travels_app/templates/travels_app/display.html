@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Plan</title>
+        {% load static %}
+        <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'users_app/css/style.css' %}">
+        <!-- Put the static files in the static folder inside your app.
+            Django collects files within all static folders and puts them within a single folder -->
+    </head>
+    <body>
+        <article>
+            <a href="/travels">Home</a>  <a href="/logout">Logout</a>
+            <h1>{{trip.destination}}</h1>
+            <p>Planned by: {{trip.trip_creator.name}}</p>
+            <p>Description: {{trip.description}}</p>
+            <p>Travel Date From: {{trip.start}}</p>
+            <p>Travel Date To: {{trip.end}}</p>
+            <h1>Other users' joining the trip:</h1>
+            {% for attendee in other_attendees %}
+            <p>{{attendee.name}}</p>
+            {% endfor %}
+        </article>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Login/Registration</title>
+        {% load static %}
+        <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'users_app/css/style.css' %}">
+        <!-- Put the static files in the static folder inside your app.
+            Django collects files within all static folders and puts them within a single folder -->
+    </head>
+    <body>
+        <article>
+            <h1>Welcome!</h1>
+            <section class="section register">
+                <h2>Register</h2>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/processRegistration" method="post">
+                {% csrf_token %}
+                    <p>Name:<br>
+
+                    <input type="text" name="name" value=""></p>
+                    <p>Username:<br>
+
+                    <input type="text" name="username" value=""></p>
+
+                    <p>Password:<br>
+
+                    <input type="password" name="password1"></p>
+                    <p>Password should be at least 8 characters</p>
+                    <p>Confirm Password:<br>
+
+                    <input type="password" name="password2"></p>
+                    <input type="submit" class="btn" value="Register">
+                </form>
+            </section>
+            <section class="section login">
+                <h2>Login</h2>
+                <form action="/processLogin" method="post">
+                {% csrf_token %}
+                    <p>Username:<br>
+                    <input type="text" name="username"></p>
+                    <p>Password:<br>
+                    <input type="password" name="password3"></p>
+                    <input type="submit" class="btn" value="Login">
+                </form>
+            </section>
+        </article>
+    </body>
+</html>
